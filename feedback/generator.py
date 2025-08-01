@@ -13,15 +13,18 @@ def generate_feedback(keypoints, lang="en"):
     feedbacks = []
     rules_triggered = 0
 
-    shoulder = keypoints[2]
-    hip = keypoints[8]
-    knee = keypoints[9]
-    ankle = keypoints[10]
+    keypoints = keypoints.reshape(17, 2)
+
+    shoulder = keypoints[5]    # left shoulder
+    hip     = keypoints[11]   # left hip
+    knee    = keypoints[13]   # left knee
+    ankle   = keypoints[15]   # left ankle
 
     knee_angle = calculate_angle(hip, knee, ankle)
     torso_angle = calculate_angle(shoulder, hip, np.array([hip[0], hip[1]-100]))
 
-    if knee_angle < 30:
+
+    if knee_angle < 60:
         feedbacks.append(random.choice(FEEDBACK_MESSAGES[lang]["knee_too_much"]))
         rules_triggered += 1
     elif knee_angle > 130:

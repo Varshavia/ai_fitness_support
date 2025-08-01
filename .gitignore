@@ -2,6 +2,7 @@
 __pycache__/
 *.py[codz]
 *$py.class
+*pyc
 
 # C extensions
 *.so
@@ -135,7 +136,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
+.env/
 .envrc
 .venv
 env/
@@ -201,3 +202,5 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+.DS_Store
