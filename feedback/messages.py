@@ -20,7 +20,17 @@ FEEDBACK_MESSAGES = {
             "📐 Lean forward just a little.",
             "⚠️ Posture too vertical — balance your weight."
         ],
-        "perfect": "✅ Excellent squat form! 🔥 Keep it up! 💪",
+        "pushup_sag": [
+            "🧍 Your body is sagging! Keep your torso aligned.",
+            "📉 Lower back too low — engage your core!",
+            "⚠️ Body form collapsed, raise your hips."
+        ],
+        "pushup_shallow": [
+            "🔁 Not bending enough — go deeper.",
+            "⛔ Shallow push-up detected.",
+            "🦾 Elbows aren't flexing sufficiently."
+        ],
+        "perfect": "✅ Excellent form! 🔥 Keep it up! 💪",
         "title": "📊 Feedback Summary:",
         "score": "🏅 Form Score: {}/100"
     },
@@ -45,7 +55,17 @@ FEEDBACK_MESSAGES = {
             "📐 Biraz öne eğilmen gerek.",
             "⚠️ Postür çok dik — ağırlığını dengele."
         ],
-        "perfect": "✅ Harika squat formu! 🔥 Aynen devam! 💪",
+        "pushup_sag": [
+            "🧍 Vücudun sarkıyor! Gövdeni hizalı tut.",
+            "📉 Belin çok alçakta — karın kaslarını çalıştır.",
+            "⚠️ Vücut formun çöktü, kalçanı kaldır."
+        ],
+        "pushup_shallow": [
+            "🔁 Yeterince eğilmiyorsun — daha derine in.",
+            "⛔ Yüzeysel push-up tespit edildi.",
+            "🦾 Dirsekler yeterince bükülmüyor."
+        ],
+        "perfect": "✅ Mükemmel form! 🔥 Aynen devam! 💪",
         "title": "📊 Geri Bildirim Özeti:",
         "score": "🏅 Form Skoru: {}/100"
     },
@@ -70,7 +90,17 @@ FEEDBACK_MESSAGES = {
             "📐 Lehne dich etwas nach vorne.",
             "⚠️ Haltung zu vertikal — Gleichgewicht anpassen."
         ],
-        "perfect": "✅ Hervorragende Hockform! 🔥 Weiter so! 💪",
+        "pushup_sag": [
+            "🧍 Dein Körper hängt durch! Halte deinen Oberkörper gerade.",
+            "📉 Unterer Rücken zu tief – spanne deinen Kern an!",
+            "⚠️ Haltung zusammengebrochen, hebe deine Hüfte an."
+        ],
+        "pushup_shallow": [
+            "🔁 Nicht tief genug – beuge dich mehr.",
+            "⛔ Flacher Liegestütz erkannt.",
+            "🦾 Ellenbogen beugen sich nicht ausreichend."
+        ],
+        "perfect": "✅ Hervorragende Form! 🔥 Weiter so! 💪",
         "title": "📊 Feedback-Zusammenfassung:",
         "score": "🏅 Form-Punktzahl: {}/100"
     },
@@ -95,10 +125,20 @@ FEEDBACK_MESSAGES = {
             "📐 Inclínate un poco hacia adelante.",
             "⚠️ Postura demasiado vertical — equilibra tu peso."
         ],
-        "perfect": "✅ ¡Forma perfecta de sentadilla! 🔥 ¡Sigue así! 💪",
+        "pushup_sag": [
+            "🧍 ¡Tu cuerpo se está hundiendo! Mantén el torso alineado.",
+            "📉 Espalda baja demasiado baja — activa tu core.",
+            "⚠️ Forma colapsada, sube las caderas."
+        ],
+        "pushup_shallow": [
+            "🔁 No estás bajando lo suficiente — ve más profundo.",
+            "⛔ Flexión poco profunda detectada.",
+            "🦾 Los codos no se flexionan lo suficiente."
+        ],
+        "perfect": "✅ ¡Forma perfecta! 🔥 ¡Sigue así! 💪",
         "title": "📊 Resumen de Retroalimentación:",
         "score": "🏅 Puntuación de Forma: {}/100"
-    },    
+    },
     "zh": {
         "knee_too_much": [
             "🦵 你的膝盖弯得太多了。",
@@ -119,6 +159,16 @@ FEEDBACK_MESSAGES = {
             "🦍 你的姿势太直了！多用点臀部发力。",
             "📐 稍微向前倾一点。",
             "⚠️ 姿势太垂直 — 调整重心保持平衡。"
+        ],
+        "pushup_sag": [
+            "🧍 你的身体下沉了！保持躯干对齐。",
+            "📉 下背部太低 — 收紧核心肌群！",
+            "⚠️ 姿势塌陷，抬高你的臀部。"
+        ],
+        "pushup_shallow": [
+            "🔁 下压不够 — 需要更深一点。",
+            "⛔ 检测到浅层俯卧撑。",
+            "🦾 手肘弯曲幅度不够。"
         ],
         "perfect": "✅ 蹲姿完美！🔥 继续保持！💪",
         "title": "📊 反馈总结：",

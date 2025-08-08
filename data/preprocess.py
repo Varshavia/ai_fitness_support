@@ -11,32 +11,25 @@ def load_and_preprocess_data(keypoint_dir="keypoints"):
     data = []
     labels = []
 
-    correct_files = glob.glob(f"{keypoint_dir}/correct/*.npy")
-    incorrect_files = glob.glob(f"{keypoint_dir}/incorrect/*.npy")
+    # Tüm hareketleri al (örneğin squat, pushup)
+    movements = [d for d in glob.glob(f"{keypoint_dir}/*") if not d.endswith(".DS_Store")]
 
-    for file in correct_files:
-        keypoints = np.load(file)
-        if keypoints.shape[0] > 0:
-            data.append(keypoints)
-            labels.append(1)
+    for movement_path in movements:
+        for label_type, label_value in [("correct", 1), ("incorrect", 0)]:
+            files = glob.glob(f"{movement_path}/{label_type}/*.npy")
+            for file in files:
+                keypoints = np.load(file)
+                if keypoints.shape[0] > 0:
+                    sequence = keypoints[:, :INPUT_DIM]
+                    if len(sequence) >= SEQ_LEN:
+                        sequence = sequence[:SEQ_LEN]
+                    else:
+                        pad = np.zeros((SEQ_LEN - len(sequence), INPUT_DIM))
+                        sequence = np.vstack([sequence, pad])
+                    data.append(sequence)
+                    labels.append(label_value)
 
-    for file in incorrect_files:
-        keypoints = np.load(file)
-        if keypoints.shape[0] > 0:
-            data.append(keypoints)
-            labels.append(0)
-
-    processed_data = []
-    for keypoint_seq in data:
-        flattened = keypoint_seq[:, :34]
-        if len(flattened) >= SEQ_LEN:
-            flattened = flattened[:SEQ_LEN]
-        else:
-            pad = np.zeros((SEQ_LEN - len(flattened), INPUT_DIM))
-            flattened = np.vstack([flattened, pad])
-        processed_data.append(flattened)
-
-    X = torch.tensor(processed_data, dtype=torch.float32)
+    X = torch.tensor(np.array(data), dtype=torch.float32)
     y = torch.tensor(labels, dtype=torch.long)
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
