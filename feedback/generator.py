@@ -48,16 +48,17 @@ def generate_feedback(keypoints, lang="en", movement="squat"):
         hip = keypoints[11]
         ankle = keypoints[15]
         elbow = keypoints[13]
-        wrist = keypoints[15]
+        wrist = keypoints[9]
 
         body_angle = calculate_angle(shoulder, hip, ankle)
         elbow_angle = calculate_angle(shoulder, elbow, wrist)
 
-        if body_angle < 160:
-            feedbacks.append(random.choice(FEEDBACK_MESSAGES[lang]["pushup_sag"]))
+        if body_angle < 170:
+            feedbacks.append(random.choice(FEEDBACK_MESSAGES[lang]
+            ["pushup_sag"]))
             rules_triggered += 1
 
-        if elbow_angle > 130:
+        if elbow_angle > 120:
             feedbacks.append(random.choice(FEEDBACK_MESSAGES[lang]["pushup_shallow"]))
             rules_triggered += 1
 
@@ -74,3 +75,6 @@ def generate_feedback(keypoints, lang="en", movement="squat"):
         "summary": FEEDBACK_MESSAGES[lang]["perfect"] if rules_triggered == 0 else FEEDBACK_MESSAGES[lang]["title"],
         "score_message": FEEDBACK_MESSAGES[lang]["score"].format(score)
     }
+
+
+    

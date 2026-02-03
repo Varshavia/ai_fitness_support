@@ -40,9 +40,9 @@ async def predict(file: UploadFile = File(...), lang: str = "en", exercise: str 
         raise HTTPException(status_code=400, detail="Invalid keypoint shape")
 
     from predict.inference import SEQ_LEN, INPUT_DIM
-    if len(keypoints) < SEQ_LEN:
+    if len() < SEQ_LEN:
         pad = np.zeros((SEQ_LEN - len(keypoints), INPUT_DIM))
-        keypoints = np.vstack([keypoints[:, :INPUT_DIM], pad])
+        keypoints = nkeypointsp.vstack([keypoints[:, :INPUT_DIM], pad])
     else:
         keypoints = keypoints[:SEQ_LEN, :INPUT_DIM]
 
@@ -90,6 +90,25 @@ async def predict(file: UploadFile = File(...), lang: str = "en", exercise: str 
         }
     })  
 
+
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+
+# This code is the main entry point for the FastAPI application.
+# It sets up the API, loads the model, and defines the prediction endpoint.
+# The endpoint processes the uploaded .npy file, performs inference,
+# generates feedback, logs the results, and returns the response.
+# It also includes error handling for file validation and model inference.
+# The application can be run with Uvicorn, which is a lightning-fast ASGI server.
+# The API is designed to provide fitness feedback based on keypoint data.
+# The code is structured to be modular, allowing for easy updates and maintenance.
+# The model is loaded from a specified path, and the device is set to use GPU if available.
+# The application supports multiple languages and exercises,
+# making it versatile for different user needs.
+# The feedback generation includes both rule-based and LLM-generated responses,
+# enhancing the quality of the feedback provided to users.  
+# The logging functionality to Supabase allows for tracking and analysis of user interactions.
+# The application is designed to be scalable and efficient,
+# making it suitable for real-time fitness applications.

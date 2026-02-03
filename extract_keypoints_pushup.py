@@ -56,3 +56,4 @@ for label in ["correct", "incorrect"]:
             output_path = os.path.join(output_folder, output_filename)
             np.save(output_path, keypoints)
             print(f"Registered: {output_filename}")
+           

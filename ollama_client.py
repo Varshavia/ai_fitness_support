@@ -1,4 +1,3 @@
-# llm/ollama_client.py
 import json, re
 from typing import Dict, Any
 from ollama import Client
@@ -16,7 +15,7 @@ SYSTEM_PROMPT = (
 
 LANG_HINT = {
   "en": "Respond ONLY in English. Do not use other languages.",
-  "tr": "Cevabı SADECE Türkçe yaz. Başka dil kullanma.",
+  "tr": "Cevabi SADECE Türkçe yaz. Başka dil kullanma.",
   "de": "Antworte NUR auf Deutsch. Keine andere Sprache verwenden.",
   "es": "Responde SOLO en español. No uses otros idiomas.",
   "zh": "请只用中文回答。不要使用其他语言。"
@@ -62,9 +61,9 @@ Açılar (derece; null olabilir):
 Sadece AŞAĞIDAKİ ŞEMA ile KESİN JSON DÖN:
 {{
   "summary": "1-2 cümle genel değerlendirme",
-  "advice": ["≤5 kısa uygulanabilir ipucu, her biri ≤12 kelime"],
+  "advice": ["≤5 kısa uygulanabilir ipucu, her biri en fazla gelen açılara göre yorumu yap ≤15 kelime"],
   "warnings": ["opsiyonel risk/teknik notlar"],
-  "focus_next_rep": ["≤3 mikro ipucu (sonraki tekrar)"],
+  "focus_next_rep": ["≤3 mikro ipucu ama yaratıcı ol ve her defasında farklı yorum yap(sonraki tekrar)"],
   "language": "{lang}"
 }}
 Kurallar:
@@ -96,13 +95,26 @@ Kurallar:
         except Exception as e:
             last_err = e
 
+    
+
     return {
         "summary": f"{'Form iyi' if predicted_label=='correct' else 'Form geliştirilmeli'} ({movement}, skor={score}).",
         "advice": ["Merkezi sık.", "Tempoyu kontrol et.", "Eklemleri hizalı tut."],
-        "warnings": [],
-        "focus_next_rep": ["Derinliği tutarlı yap."],
+        "warnings": ["Diz açısına dikkat et." if angles.get('knee_angle') and angles['knee_angle'] > 160 else ""],
+        "focus_next_rep": ["Derinliği tutarlı yap.", "Nefes almayı unutma."],
         "language": lang,
-        "debug": {"fallback": True, "host": OLLAMA_HOST, "model": MODEL_NAME, "error": str(last_err)}
+        "debug": {
+            "fallback": True,
+            "host": OLLAMA_HOST,
+            "model": MODEL_NAME,
+            "error": str(last_err),
+            "input": {
+                "movement": movement,
+                "angles": angles,
+                "score": score,
+                "predicted_label": predicted_label
+            }
+        }
     }
 
 def ping_llm() -> str:
@@ -111,3 +123,4 @@ def ping_llm() -> str:
         return r["message"]["content"].strip()
     except Exception as e:
         return f"LLM unreachable: {e}"
+    
