@@ -40,9 +40,9 @@ async def predict(file: UploadFile = File(...), lang: str = "en", exercise: str 
         raise HTTPException(status_code=400, detail="Invalid keypoint shape")
 
     from predict.inference import SEQ_LEN, INPUT_DIM
-    if len() < SEQ_LEN:
+    if len(keypoints) < SEQ_LEN:
         pad = np.zeros((SEQ_LEN - len(keypoints), INPUT_DIM))
-        keypoints = nkeypointsp.vstack([keypoints[:, :INPUT_DIM], pad])
+        keypoints = np.vstack([keypoints[:, :INPUT_DIM], pad])
     else:
         keypoints = keypoints[:SEQ_LEN, :INPUT_DIM]
 

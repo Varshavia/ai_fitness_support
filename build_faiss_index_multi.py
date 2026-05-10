@@ -6,13 +6,7 @@ import torch
 
 from model.abse_model import ABSEModel
 from embedding_extractor import extract_embedding
-from supabase import create_client
-
-
-SUPABASE_URL = "https://mpoqcfrkvbsuixatagok.supabase.co"
-SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1wb3FjZnJrdmJzdWl4YXRhZ29rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ0NjEyNDAsImV4cCI6MjA3MDAzNzI0MH0.SrXGRvximgDg1Ts0THo2qLL4FdC_N69IGDZUw-VaXNY"
-
-supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+from supabase_client import supabase
 
 
 DATA_DIR = "keypoints"

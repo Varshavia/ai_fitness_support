@@ -14,7 +14,6 @@ def generate_feedback(keypoints, lang="en", movement="squat"):
     rules_triggered = 0
     keypoints = keypoints.reshape(17, 2)
 
-    # Tüm açılar default None
     knee_angle = None
     torso_angle = None
     body_angle = None
@@ -54,15 +53,16 @@ def generate_feedback(keypoints, lang="en", movement="squat"):
         elbow_angle = calculate_angle(shoulder, elbow, wrist)
 
         if body_angle < 170:
-            feedbacks.append(random.choice(FEEDBACK_MESSAGES[lang]
-            ["pushup_sag"]))
+            feedbacks.append(random.choice(FEEDBACK_MESSAGES[lang]["pushup_sag"]))
             rules_triggered += 1
 
         if elbow_angle > 120:
             feedbacks.append(random.choice(FEEDBACK_MESSAGES[lang]["pushup_shallow"]))
             rules_triggered += 1
 
-    score = round(100 * (4 - rules_triggered) / 4, 2)
+    max_rules = {"squat": 4, "pushup": 2}
+    total_rules = max_rules.get(movement, max(rules_triggered, 1))
+    score = round(100 * (total_rules - rules_triggered) / total_rules, 2)
 
     return {
         "knee_angle": round(knee_angle, 2) if knee_angle is not None else None,
@@ -75,6 +75,3 @@ def generate_feedback(keypoints, lang="en", movement="squat"):
         "summary": FEEDBACK_MESSAGES[lang]["perfect"] if rules_triggered == 0 else FEEDBACK_MESSAGES[lang]["title"],
         "score_message": FEEDBACK_MESSAGES[lang]["score"].format(score)
     }
-
-
-    
